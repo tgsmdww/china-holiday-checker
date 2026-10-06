@@ -18,11 +18,22 @@ function evaluateTrip(start,end){
  const rushPeriods=(calendarData?.travelRush??[]).filter(r=>overlap(start,end,r.start,r.end));
  const rush=rushPeriods.length>0;
  const firstYear=Number(start.slice(0,4)), lastYear=Number(end.slice(0,4));
- const unknown=!calendarData || lastYear-firstYear>100 || Array.from({length:lastYear-firstYear+1},(_,i)=>String(firstYear+i)).some(y=>!verifiedYears.includes(y));
+ const tripYears=lastYear-firstYear<=100?Array.from({length:lastYear-firstYear+1},(_,i)=>String(firstYear+i)):[];
+ const missingYears=tripYears.filter(y=>!verifiedYears.includes(y));
+ const unknown=!calendarData || lastYear-firstYear>100 || missingYears.length>0;
  let level=unknown?'unknown':matches.some(h=>h.level==='high')?'high':matches.length||rush?'busy':'clear';
  let title=unknown?'Some dates are outside our verified calendar':matches.some(h=>h.level==='high')?'You’re travelling during a major holiday':matches.length?'Your trip overlaps a public holiday':rush?'No holiday overlap, but it’s travel-rush season':'No national holiday overlap';
  let detail=matches.length?matches.map(h=>h.name+' ('+dateRange(h.start,h.end)+')').join('; ')+'. '+days+' '+(days===1?'day':'days')+' of your trip '+(days===1?'overlaps':'overlap')+' an official break.':unknown?'Some dates have no verified annual schedule yet. Unverified dates are not marked as quiet.':rush?'Your dates overlap a verified Spring Festival travel-rush period.':'Your dates fall outside the verified national holiday breaks. A useful starting point for a calmer trip.';
  let advice=unknown?'Check the official schedule for every year of your trip before booking.':level==='high'?'If your dates are flexible, move your trip outside the holiday. If not, secure transport and attraction reservations early.':level==='busy'?'Allow for busier transport and popular sights. Compare nearby dates before booking.':'Weekends, school breaks and local events can still be busy. Check your exact route before booking.';
+ if(unknown){
+  const yearLabel=missingYears.length<=3?missingYears.join(' & '):missingYears[0]+'–'+missingYears.at(-1);
+  title=yearLabel?yearLabel+' holiday dates aren’t confirmed yet':'We can’t check all of these dates yet';
+  const newYears=missingYears.filter(y=>overlap(start,end,y+'-01-01',y+'-01-01'));
+  detail=newYears.length?'Your trip includes New Year’s Day (1 Jan '+newYears.join(', 1 Jan ')+'), but we haven’t confirmed the full holiday break.':'We don’t yet have the full official schedule for these dates, so we can’t tell whether your trip avoids public holidays.';
+  if(matches.length)detail+=' Confirmed overlap: '+matches.map(h=>h.name+' ('+dateRange(h.start,h.end)+' '+h.start.slice(0,4)+')').join('; ')+'.';
+  advice='Check back before booking. We check official announcements daily.';
+  if(!calendarData){title='Holiday calendar couldn’t load';detail='We can’t check your dates right now.';advice='Please refresh the page and try again.'}
+ }
  if(rush&&matches.length)advice+=' The wider Spring Festival travel rush runs '+rushPeriods.map(r=>dateRange(r.start,r.end)+' '+r.start.slice(0,4)).join('; ')+'.';
  if(!unknown&&!matches.length&&!rush&&Array.from({length:lastYear-firstYear+1},(_,i)=>firstYear+i).some(y=>overlap(start,end,y+'-07-01',y+'-08-31')))advice+=' July and August may coincide with school summer breaks; dates vary locally.';
  return {level,title,detail,advice,holidayDays:days,holidays:matches.map(h=>h.name),springFestivalTravelRush:rush,verifiedAllDates:!unknown};
