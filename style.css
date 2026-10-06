@@ -14,3 +14,15 @@
 @media(max-width:480px){.holiday-countdown{margin-top:20px;padding:22px;grid-template-columns:1fr;gap:22px}.holiday-countdown h2{font-size:32px}.countdown-eyebrow{font-size:12px;letter-spacing:1px}.countdown-counter{padding:18px 0 0;border-left:0;border-top:1px solid #ffffff55}.countdown-counter strong{font-size:84px}.countdown-current{font-size:12px}.holiday-countdown+.intro h1{font-size:29px}.holiday-countdown+.intro{padding:23px 0}}
 
 .sources .update-warning{color:#98251e;background:#fff0ed;padding:10px 12px;border-left:3px solid #be3229;border-radius:3px}
+
+/* Bring peak holiday periods forward in the calendar. */
+.holiday{padding:17px 16px;grid-template-columns:60px minmax(0,1fr) auto}
+.holiday-high{background:#fbeee9;border-left:4px solid var(--red);border-top-color:transparent;border-radius:6px;margin:6px 0;padding-left:12px}
+.holiday-high h3{font-size:18px;font-weight:750;color:#982b22}
+.holiday-high .month{color:#982b22}
+.holiday-date .high-label{display:table;margin-left:auto;background:var(--red);color:#fff;border-radius:4px;font-size:13px;font-weight:750;line-height:1.35;padding:6px 10px;margin-top:7px}
+.holiday-duration{display:block;font-size:12px;font-weight:400;color:var(--muted);margin-top:4px}
+.legend span:first-child{color:#982b22;font-weight:700}
+.calendar-section+.intro h1{font-size:38px}
+@media(max-width:760px){.calendar-section+.intro h1{font-size:34px}}
+@media(max-width:480px){.holiday{grid-template-columns:minmax(0,1fr) auto;padding:16px 12px;gap:10px}.holiday-high{padding-left:8px}.holiday-high h3{font-size:17px}.holiday-date .high-label{font-size:12px;padding:6px 8px}.calendar-section+.intro h1{font-size:29px}}

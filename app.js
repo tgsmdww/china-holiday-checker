@@ -119,11 +119,11 @@ function renderCalendar(){
  for(const year of verifiedYears){
   if(verifiedYears.length>1){const heading=document.createElement('h3');heading.textContent=year;list.append(heading)}
   for(const h of calendarData.years[year].holidays){
-   const article=document.createElement('article');article.className='holiday';
+   const article=document.createElement('article');article.className='holiday'+(h.level==='high'?' holiday-high':'');
    const month=document.createElement('span');month.className='month';month.textContent=date(h.start).toLocaleDateString('en-US',{month:'short',timeZone:'UTC'}).toUpperCase();
    const copy=document.createElement('div');const name=document.createElement('h3');name.textContent=h.name;const local=document.createElement('p');local.textContent=h.local;copy.append(name,local);
    const when=document.createElement('div');when.className='holiday-date';when.textContent=dateRange(h.start,h.end);
-   const impact=document.createElement('small');impact.className=h.level+'-label';impact.textContent=(h.level==='high'?'Major travel peak':'Short holiday')+' · '+(Math.round((date(h.end)-date(h.start))/DAY)+1)+' days';when.append(impact);article.append(month,copy,when);list.append(article);
+   const impact=document.createElement('small');impact.className=h.level+'-label';impact.textContent=h.level==='high'?'Major travel peak':'Short holiday';const duration=document.createElement('span');duration.className='holiday-duration';duration.textContent=(Math.round((date(h.end)-date(h.start))/DAY)+1)+' days off';when.append(impact,duration);article.append(month,copy,when);list.append(article);
   }
  }
  const sources=document.getElementById('annual-sources');sources.replaceChildren();
