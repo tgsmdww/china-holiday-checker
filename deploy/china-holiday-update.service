@@ -1,0 +1,28 @@
+[Unit]
+Description=Check official China holiday notices and publish verified data
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=3h
+StartLimitBurst=3
+
+[Service]
+Type=oneshot
+User=holiday-updater
+Group=holiday-updater
+WorkingDirectory=/var/lib/china-holiday-checker/repo
+Environment=HOME=/var/lib/china-holiday-checker
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=GIT_TERMINAL_PROMPT=0
+ExecStart=/usr/bin/python3 /opt/china-holiday-checker/publish_update.py
+TimeoutStartSec=20min
+Restart=on-failure
+RestartSec=15min
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/china-holiday-checker
+
+[Install]
+WantedBy=multi-user.target

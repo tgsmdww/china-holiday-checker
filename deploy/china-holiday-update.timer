@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily China holiday check at 09:15 China time
+
+[Timer]
+OnCalendar=*-*-* 09:15:00 Asia/Shanghai
+Persistent=true
+AccuracySec=1min
+Unit=china-holiday-update.service
+
+[Install]
+WantedBy=timers.target

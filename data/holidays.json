@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "years": {
+    "2026": {
+      "source": "https://www.gov.cn/zhengce/zhengceku/202511/content_7047091.htm",
+      "noticeHash": "2ba01519c92801a8282104248bf7859f05c865bc5a43e2fe821f672e796c03dd",
+      "holidays": [
+        {
+          "name": "New Year's Day",
+          "local": "元旦",
+          "start": "2026-01-01",
+          "end": "2026-01-03",
+          "level": "busy"
+        },
+        {
+          "name": "Spring Festival",
+          "local": "春节",
+          "start": "2026-02-15",
+          "end": "2026-02-23",
+          "level": "high"
+        },
+        {
+          "name": "Qingming Festival",
+          "local": "清明节",
+          "start": "2026-04-04",
+          "end": "2026-04-06",
+          "level": "busy"
+        },
+        {
+          "name": "Labour Day",
+          "local": "劳动节",
+          "start": "2026-05-01",
+          "end": "2026-05-05",
+          "level": "high"
+        },
+        {
+          "name": "Dragon Boat Festival",
+          "local": "端午节",
+          "start": "2026-06-19",
+          "end": "2026-06-21",
+          "level": "busy"
+        },
+        {
+          "name": "Mid-Autumn Festival",
+          "local": "中秋节",
+          "start": "2026-09-25",
+          "end": "2026-09-27",
+          "level": "busy"
+        },
+        {
+          "name": "National Day",
+          "local": "国庆节",
+          "start": "2026-10-01",
+          "end": "2026-10-07",
+          "level": "high"
+        }
+      ],
+      "verifiedAt": "2026-10-06T10:42:44Z"
+    }
+  },
+  "lastSuccessfulCheck": "2026-10-06T10:42:44Z",
+  "travelRush": [
+    {
+      "start": "2026-02-02",
+      "end": "2026-03-13",
+      "source": "https://english.www.gov.cn/news/202602/22/content_WS699ac3f1c6d00ca5f9a09342.html"
+    }
+  ]
+}

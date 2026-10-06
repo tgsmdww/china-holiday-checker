@@ -1,0 +1,23 @@
+const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/strict');
+const nodes=new Map();function node(id){if(!nodes.has(id))nodes.set(id,{value:id==='arrival'?'2026-10-01':'2026-10-07',textContent:'',hidden:false,dataset:{},classList:{toggle(){}},append(){},replaceChildren(){},setAttribute(){},addEventListener(){}});return nodes.get(id)}
+const c=vm.createContext({console,URL,Date,Intl,document:{getElementById:node,querySelector:node,createElement:()=>node(Math.random()),addEventListener(){}},setInterval(){},fetch:()=>new Promise(()=>{})});
+vm.runInContext(fs.readFileSync('app.js','utf8'),c);
+c.fixture=JSON.parse(fs.readFileSync('data/holidays.json','utf8'));
+vm.runInContext('calendarData=validateCalendar(fixture);verifiedYears=Object.keys(calendarData.years).sort();holidays=verifiedYears.flatMap(y=>calendarData.years[y].holidays);',c);
+const evaluate=(a,b)=>vm.runInContext(`evaluateTrip('${a}','${b}')`,c);
+assert.equal(evaluate('2026-10-01','2026-10-07').holidayDays,7);
+assert.equal(evaluate('2026-10-12','2026-10-23').level,'clear');
+assert.equal(evaluate('2027-05-01','2027-05-05').level,'unknown');
+assert.equal(evaluate('2026-01-01','2026-12-31').holidayDays,33);
+assert.equal(evaluate('2026-02-02','2026-02-03').springFestivalTravelRush,true);
+assert.throws(()=>evaluate('2026-02-30','2026-03-01'));
+assert.throws(()=>evaluate('2026-10-07','2026-10-01'));
+assert.equal(vm.runInContext("getCountdown(new Date('2026-10-06T00:00:00Z')).days",c),87);
+assert.equal(vm.runInContext("getCountdown(new Date('2026-12-31T16:00:00Z')).days",c),0);
+assert.equal(vm.runInContext("getCountdown(new Date('2027-01-02T00:00:00Z')).state",c),'unknown');
+vm.runInContext("calendarData.lastSuccessfulCheck='2026-10-01T00:00:00Z';updateStatus={state:'ok'};renderUpdateStatus(new Date('2026-10-06T00:00:00Z'))",c);
+assert.match(node('update-status').textContent,/need attention/);
+vm.runInContext("calendarData.years['2027']=JSON.parse(JSON.stringify(calendarData.years['2026']).replaceAll('2026','2027'));verifiedYears=Object.keys(calendarData.years).sort();holidays=verifiedYears.flatMap(y=>calendarData.years[y].holidays)",c);
+assert.equal(evaluate('2027-05-01','2027-05-05').holidayDays,5);
+assert.equal(evaluate('2027-05-01','2027-05-05').verifiedAllDates,true);
+console.log('13 browser-logic checks passed, including future-year data and stale status.');
