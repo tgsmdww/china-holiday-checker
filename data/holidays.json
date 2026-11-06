@@ -55,10 +55,66 @@
           "level": "high"
         }
       ],
-      "verifiedAt": "2026-11-05T01:15:18Z"
+      "verifiedAt": "2026-11-06T01:15:18Z"
+    },
+    "2027": {
+      "source": "https://www.gov.cn/zhengce/zhengceku/202611/content_7085102.htm",
+      "noticeHash": "612d1c285e82c9ff7ccdff764bfb64e2f617005986cbd7f48adece85d2ceab53",
+      "holidays": [
+        {
+          "name": "New Year's Day",
+          "local": "元旦",
+          "start": "2027-01-01",
+          "end": "2027-01-03",
+          "level": "busy"
+        },
+        {
+          "name": "Spring Festival",
+          "local": "春节",
+          "start": "2027-02-05",
+          "end": "2027-02-13",
+          "level": "high"
+        },
+        {
+          "name": "Qingming Festival",
+          "local": "清明节",
+          "start": "2027-04-03",
+          "end": "2027-04-05",
+          "level": "busy"
+        },
+        {
+          "name": "Labour Day",
+          "local": "劳动节",
+          "start": "2027-05-01",
+          "end": "2027-05-05",
+          "level": "high"
+        },
+        {
+          "name": "Dragon Boat Festival",
+          "local": "端午节",
+          "start": "2027-06-09",
+          "end": "2027-06-09",
+          "level": "busy"
+        },
+        {
+          "name": "Mid-Autumn Festival",
+          "local": "中秋节",
+          "start": "2027-09-15",
+          "end": "2027-09-15",
+          "level": "busy"
+        },
+        {
+          "name": "National Day",
+          "local": "国庆节",
+          "start": "2027-10-01",
+          "end": "2027-10-07",
+          "level": "high"
+        }
+      ],
+      "verifiedAt": "2026-11-06T01:15:18Z"
     }
   },
-  "lastSuccessfulCheck": "2026-11-05T01:15:18Z",
+  "lastSuccessfulCheck": "2026-11-06T01:15:18Z",
   "travelRush": [
     {
       "start": "2026-02-02",
